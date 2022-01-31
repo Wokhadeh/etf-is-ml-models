@@ -1,5 +1,6 @@
 import pandas as pd
-
+import seaborn as sns
+import matplotlib.pyplot as plt
 # predict max amount of money that person is ready to pay for new car
 
 
@@ -15,7 +16,15 @@ print(dataset_car_purchase.tail())
 print(dataset_car_purchase.info())
 print(dataset_car_purchase.describe())
 
+# 3. Show correlation between parameters
 
+sns.heatmap(dataset_car_purchase.corr())
+plt.show()
+
+# Strong correlation (age, max_purchase_amount), (salary, max_purchase_amount)
+# Medium correlation (net_worth, max_purchase_amount)
+# Weak correlation (credit_card_debt, max_purchase_amount) !?!? and  (customer_id, max_purchase_amount)
+# There is no other important correlation between potential parameters
 
 
 
