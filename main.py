@@ -1,6 +1,9 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
 # predict max amount of money that person is ready to pay for new car
 
 
@@ -25,6 +28,18 @@ plt.show()
 # Medium correlation (net_worth, max_purchase_amount)
 # Weak correlation (credit_card_debt, max_purchase_amount) !?!? and  (customer_id, max_purchase_amount)
 # There is no other important correlation between potential parameters
+
+# 4. Choose parameters for model
+
+# Not important parameters: customer_id
+# Maybe not important parameters: credit_card_debt !?!? , age !?!? (decided to include it in model anyway)
+data_train = dataset_car_purchase[['age', 'annual_salary', 'credit_card_debt', 'net_worth']]
+labels = dataset_car_purchase['max_purchase_amount']
+
+# 6. Prediction using linear regression from sklearn
+
+
+
 
 
 
