@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
-
+from knn_manhattan import KNNManhattan
 
 # predict state of car using knn algorithm
 
@@ -24,7 +24,7 @@ print(dataset_car_state.describe())
 
 for col in dataset_car_state.columns[:-1]:
     cp = sns.countplot(x=col, hue="status", data=dataset_car_state)
-    plt.show()
+    #plt.show()
 
 # 4. Choose parameters for model and transform data
 
@@ -51,9 +51,21 @@ knn_skl_model = KNeighborsClassifier()
 knn_skl_model.fit(X_train,Y_train)
 predicted = knn_skl_model.predict(X_test)
 
-ser_predicted = pd.Series(data=predicted, name='predicted', index=X_test.index)
-new_df = pd.concat([Y_test, ser_predicted], axis=1)
-print(new_df)
+# ser_predicted = pd.Series(data=predicted, name='predicted', index=X_test.index)
+# new_df = pd.concat([Y_test, ser_predicted], axis=1)
+# print(new_df)
 
 
 print('Score: ' + str(knn_skl_model.score(X_test, Y_test)))
+
+# 6. Prediction using self-implemented KNN algorithm
+
+knn_my_model = KNNManhattan()
+knn_my_model.fit(X_train, Y_train)
+predicted_my_model=knn_my_model.predict(X_test)
+new_df = pd.concat([Y_test, predicted_my_model], axis=1)
+#print(new_df)
+df1 = new_df[(new_df['status'] == new_df['prediction'])]
+print(df1)
+print('Score: ' + str(len(df1)/len(new_df)))
+
